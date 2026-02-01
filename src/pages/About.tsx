@@ -1,47 +1,41 @@
-import React from 'react';
-import { GraduationCap, Code, Database, Globe, Sparkles, Brain, Rocket, Target } from 'lucide-react';
+import { GraduationCap, Code, Database, Globe, Sparkles, Rocket, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Sidebar from '../components/Sidebar';
 
 const About = () => {
   const expertise = [
     {
-      icon: Code,
-      title: 'Python Development',
-      description: 'Building robust applications and scripts',
-      gradient: 'from-indigo-500 to-purple-500',
+      icon: Database,
+      title: 'Understand Your Needs',
+      description: 'I analyze your workflow to identify what can be automated',
+      gradient: 'from-blue-500 to-cyan-500',
       delay: 0
     },
     {
-      icon: Database,
-      title: 'Data Analysis',
-      description: 'Extracting insights from complex datasets',
-      gradient: 'from-purple-500 to-pink-500',
+      icon: Code,
+      title: 'Build Custom Solutions',
+      description: 'Create automation systems tailored to your business',
+      gradient: 'from-indigo-500 to-purple-500',
       delay: 0.1
     },
     {
       icon: Globe,
-      title: 'Web Development',
-      description: 'Creating modern, responsive websites',
+      title: 'Scale Effortlessly',
+      description: 'Systems that grow with your business without extra work',
       gradient: 'from-cyan-500 to-blue-500',
       delay: 0.2
-    },
-    {
-      icon: Brain,
-      title: 'AI & Machine Learning',
-      description: 'Developing intelligent solutions',
-      gradient: 'from-pink-500 to-rose-500',
-      delay: 0.3
     }
   ];
 
   const highlights = [
-    { icon: Rocket, label: 'B.Tech Graduate', gradient: 'from-indigo-400 to-purple-400' },
-    { icon: Target, label: 'AI & Full-Stack Focus', gradient: 'from-cyan-400 to-blue-400' },
-    { icon: Sparkles, label: 'Innovation Driven', gradient: 'from-purple-400 to-pink-400' }
+    { icon: Rocket, label: '6+ Automation Projects', gradient: 'from-indigo-400 to-purple-400' },
+    { icon: Target, label: 'WhatsApp, Email, Social', gradient: 'from-cyan-400 to-blue-400' },
+    { icon: Sparkles, label: 'Results-Driven', gradient: 'from-green-400 to-emerald-400' }
   ];
 
   return (
-    <div className="py-20 bg-slate-900 relative overflow-hidden">
+    <div className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #f8f9fa 65%, #9AE4CB 65%)' }}>
+      <Sidebar />
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -102,7 +96,7 @@ const About = () => {
             className="inline-flex items-center gap-2 mb-4"
           >
             <Sparkles className="w-6 h-6 text-yellow-400" />
-            <span className="text-lg text-gray-400 font-medium">Get to Know Me</span>
+            <span className="text-lg text-gray-400 font-medium">My Process</span>
             <Sparkles className="w-6 h-6 text-yellow-400" />
           </motion.div>
 
@@ -120,7 +114,7 @@ const About = () => {
               backgroundSize: '200% 200%',
             }}
           >
-            About Me
+            Why Work With Me
           </motion.h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -148,16 +142,16 @@ const About = () => {
               >
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                   <GraduationCap className="w-7 h-7 text-indigo-400" />
-                  My Journey
+                  Automation Specialist
                 </h3>
                 <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                  I'm <span className="text-indigo-400 font-semibold">Veerendra Kumar</span>, a passionate B.Tech graduate with a deep interest in <span className="text-purple-400 font-semibold">technology and innovation</span>.
+                  I build automation systems that help businesses <span className="text-indigo-400 font-semibold">save time and scale efficiently</span>.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                  My journey in computer science has led me to explore various domains including <span className="text-cyan-400 font-semibold">AI/ML</span>, <span className="text-cyan-400 font-semibold">data analysis</span>, <span className="text-cyan-400 font-semibold">web development</span>, and <span className="text-cyan-400 font-semibold">automation</span>.
+                  My focus is on creating <span className="text-cyan-400 font-semibold">reliable, cost-effective solutions</span> that integrate seamlessly with your existing tools.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  I specialize in <span className="text-purple-400 font-semibold">Python programming</span> and have extensive experience with <span className="text-purple-400 font-semibold">modern frameworks</span>. My goal is to create <span className="text-indigo-400 font-semibold">impactful solutions</span> that solve real-world problems through code and data-driven insights.
+                  Whether it's <span className="text-purple-400 font-semibold">WhatsApp bots, email sequences, social media posting, or custom workflows</span> — I turn manual processes into autonomous systems.
                 </p>
               </motion.div>
 
@@ -253,11 +247,10 @@ const About = () => {
             className="p-8 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-sm border border-indigo-500/20 rounded-2xl"
           >
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">What Drives Me</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">My Commitment</h3>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                I'm driven by the desire to <span className="text-indigo-400 font-semibold">innovate</span> and <span className="text-cyan-400 font-semibold">create meaningful impact</span>.
-                Whether it's building <span className="text-purple-400 font-semibold">AI-powered systems</span>, automating workflows, or developing <span className="text-cyan-400 font-semibold">full-stack applications</span>,
-                I'm always eager to learn and push the boundaries of what's possible with technology.
+                I focus on <span className="text-indigo-400 font-semibold">delivering results</span> that matter. Every automation I build is designed to <span className="text-cyan-400 font-semibold">save your team time</span> and <span className="text-purple-400 font-semibold">reduce errors</span>.
+                I provide ongoing support and optimize systems based on real performance data.
               </p>
             </div>
           </motion.div>

@@ -3,9 +3,6 @@ import type { Config } from "tailwindcss";
 export default {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
 	],
 	prefix: "",
@@ -61,7 +58,11 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'intro-dark': '#0b0c10',
+				'intro-light': '#f5f5f5',
+				'intro-accent': '#ff8c1a',
+				'intro-muted': '#9a9a9a',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
