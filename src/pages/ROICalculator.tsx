@@ -3,7 +3,6 @@ import { Zap, DollarSign, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import BackToTop from '../components/BackToTop';
-import ScrollProgress from '../components/ScrollProgress';
 
 const ROICalculator = () => {
   const [hoursPerDay, setHoursPerDay] = useState(5);
@@ -27,8 +26,6 @@ const ROICalculator = () => {
   return (
     <div className="min-h-screen bg-slate-900">
       <BackToTop />
-      <ScrollProgress />
-
       {/* Hero */}
       <section className="pt-32 pb-12 px-6">
         <div className="container mx-auto max-w-4xl text-center">
@@ -36,10 +33,10 @@ const ROICalculator = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-6xl md:text-7xl font-black text-white mb-4">
+            <h1 className="heading-1 text-white mb-4">
               Calculate Your Automation ROI
             </h1>
-            <p className="text-2xl text-gray-300">
+            <p className="body-large text-gray-300">
               See exactly how much time and money you'll save with automation.
             </p>
           </motion.div>
@@ -58,7 +55,7 @@ const ROICalculator = () => {
           >
             {/* Time Input */}
             <div className="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <h3 className="heading-3 text-white mb-6 flex items-center gap-2">
                 <Clock className="w-6 h-6 text-cyan-400" />
                 Hours Lost Daily
               </h3>
@@ -83,7 +80,7 @@ const ROICalculator = () => {
 
             {/* Cost Input */}
             <div className="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <h3 className="heading-3 text-white mb-6 flex items-center gap-2">
                 <DollarSign className="w-6 h-6 text-green-400" />
                 Hourly Cost
               </h3>
@@ -115,7 +112,7 @@ const ROICalculator = () => {
             viewport={{ once: true }}
             className="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl mb-16"
           >
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+            <h3 className="heading-3 text-white mb-6 flex items-center gap-2">
               <Zap className="w-6 h-6 text-yellow-400" />
               Error Impact
             </h3>
@@ -200,7 +197,7 @@ const ROICalculator = () => {
             viewport={{ once: true }}
             className="p-8 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 border border-indigo-500/30 rounded-2xl"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">💡 Key Insights</h3>
+            <h3 className="heading-3 text-white mb-6">💡 Key Insights</h3>
             <ul className="space-y-4">
               <li className="flex gap-3 text-gray-300">
                 <span className="text-cyan-400 font-bold">✓</span>
@@ -228,7 +225,7 @@ const ROICalculator = () => {
             viewport={{ once: true }}
             className="mt-16 text-center p-8 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl"
           >
-            <h3 className="text-3xl font-bold text-white mb-4">Ready to Realize These Savings?</h3>
+            <h3 className="heading-2 text-white mb-4">Ready to Realize These Savings?</h3>
             <p className="text-gray-300 text-lg mb-8">
               Let's schedule a discovery call to discuss your specific automation opportunity.
             </p>

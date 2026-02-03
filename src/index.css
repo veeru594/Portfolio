@@ -99,3 +99,39 @@
     @apply bg-slate-900 text-foreground;
   }
 }
+
+@layer components {
+  /* Consistent Typography System */
+
+  /* Headings */
+  .heading-1 {
+    @apply text-5xl md:text-7xl font-bold tracking-tight leading-tight;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .heading-2 {
+    @apply text-3xl md:text-5xl font-bold tracking-tight leading-snug;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-snug;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Body text */
+  .body-large {
+    @apply text-xl md:text-2xl font-light leading-relaxed;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .body-text {
+    @apply text-base md:text-lg font-normal leading-relaxed;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Set default body font */
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}

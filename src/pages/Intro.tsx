@@ -46,12 +46,12 @@ const Intro = () => {
                                 <h1 className="text-sm tracking-[0.3em] font-medium text-[#273B3A] uppercase">
                                     Veerendra Kumar
                                 </h1>
-                                <h2 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] text-[#273B3A]">
+                                <h2 className="heading-1 text-[#273B3A]">
                                     Automation Engineer
                                 </h2>
                             </motion.div>
 
-                            <motion.p variants={fadeUp} className="text-xl md:text-2xl text-[#273B3A]/80 max-w-2xl font-light leading-relaxed">
+                            <motion.p variants={fadeUp} className="body-large text-[#273B3A]/80 max-w-2xl">
                                 I build systems that remove manual work<br />
                                 and scale operations.
                             </motion.p>
@@ -110,7 +110,7 @@ const Intro = () => {
                             <h3 className="text-sm tracking-[0.3em] font-bold uppercase border-b border-[#273B3A]/20 pb-4 inline-block text-[#273B3A]">
                                 Philosophy
                             </h3>
-                            <p className="text-3xl md:text-4xl font-light leading-tight tracking-tight text-[#273B3A]">
+                            <p className="heading-2 text-[#273B3A]">
                                 Efficiency is the only architecture that matters.
                             </p>
                         </div>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle, Code2, Mail, Instagram, Youtube, FileText, Sparkles, ArrowRight, CheckCircle2, Zap, Clock, Shield } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
-import ScrollProgress from '../components/ScrollProgress';
 import FloatingName from '../components/FloatingName';
 
 const Home = () => {
@@ -15,46 +14,60 @@ const Home = () => {
 
   const services = [
     {
+      icon: <Sparkles className="w-8 h-8" />,
+      name: 'RAG Chatbots',
+      tag: 'AI Assistants',
+      description: 'Intelligent chatbots powered by your own knowledge base. Answer customer questions, provide support, and qualify leads 24/7.',
+      benefits: ['Custom Training', 'Multi-Channel', 'Context Aware']
+    },
+    {
       icon: <MessageCircle className="w-8 h-8" />,
-      name: 'WhatsApp Automation',
-      tag: 'Conversation AI',
-      description: 'Custom chatbots that handle customer support, lead qualification, and appointment booking on autopilot.',
-      benefits: ['24/7 Availability', 'Instant Responses', 'CRM Integration']
+      name: 'WhatsApp & Messaging Bots',
+      tag: 'Automation',
+      description: 'Custom chatbots for WhatsApp, Telegram, and SMS. Handle customer support, appointment booking, and lead qualification.',
+      benefits: ['24/7 Available', 'Instant Responses', 'CRM Integration']
     },
     {
       icon: <Code2 className="w-8 h-8" />,
-      name: 'Web Scrapers',
-      tag: 'Data Extraction',
-      description: 'High-performance scripts to extract data from any website. Price monitoring, leads generation, and market research.',
-      benefits: ['Anti-Detect Logic', 'Structured Data', 'Scheduled Runs']
+      name: 'Lead Scraping & Data Extraction',
+      tag: 'Lead Generation',
+      description: 'Automated lead generation from LinkedIn, Google Maps, directories, and custom sources. Clean, qualified data ready for outreach.',
+      benefits: ['Anti-Detection', 'Email Finding', 'Clean Data']
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      name: 'CRM & Lead Integration',
+      tag: 'Sales Automation',
+      description: 'Connect your lead sources to CRM systems. Auto-enrich data, trigger workflows, and sync across platforms seamlessly.',
+      benefits: ['Auto-Sync', 'Data Enrichment', 'Multi-Platform']
+    },
+    {
+      icon: <Code2 className="w-8 h-8" />,
+      name: 'Website Design & Development',
+      tag: 'Web Solutions',
+      description: 'Modern, responsive websites built for conversion. Landing pages, portfolios, and business sites with clean code.',
+      benefits: ['Fast Loading', 'Mobile First', 'SEO Optimized']
     },
     {
       icon: <Mail className="w-8 h-8" />,
-      name: 'Email Systems',
+      name: 'Email Automation',
       tag: 'Outreach',
-      description: 'Cold email infrastructure and newsletter automation. Ensure high deliverability and automated follow-ups.',
+      description: 'Cold email infrastructure, drip campaigns, and newsletter automation. High deliverability with automated follow-ups.',
       benefits: ['Inbox Rotation', 'A/B Testing', 'Reply Tracking']
     },
     {
-      icon: <Instagram className="w-8 h-8" />,
-      name: 'Social Bots',
-      tag: 'Growth',
-      description: 'Automated content scheduling and engagement scripts for Instagram, LinkedIn, and X (Twitter).',
-      benefits: ['Content Calendar', 'Auto-Engagement', 'Analytics']
-    },
-    {
-      icon: <Youtube className="w-8 h-8" />,
-      name: 'YouTube OS',
-      tag: 'Content Ops',
-      description: 'End-to-end channel management assistance. Tag generation, description optimization, and upload scheduling.',
-      benefits: ['SEO Optimization', 'Bulk Editing', 'Trend Analysis']
-    },
-    {
       icon: <FileText className="w-8 h-8" />,
-      name: 'Workflow Scripts',
-      tag: 'Efficiency',
-      description: 'Connecting your apps (Notion, Slack, Trello) to automate internal business updates and reporting.',
-      benefits: ['Error Reduction', 'Real-time Sync', 'Custom Logic']
+      name: 'Custom Automation',
+      tag: 'Workflow',
+      description: 'Bespoke automation solutions for your unique business needs. Connect any tools, automate any process.',
+      benefits: ['Custom Logic', 'API Integration', 'Scalable']
+    },
+    {
+      icon: <Shield className="w-8 h-8" />,
+      name: 'System Integration',
+      tag: 'Enterprise',
+      description: 'Connect disparate systems and create unified workflows. Zapier, Make, or custom API integrations.',
+      benefits: ['Error Handling', 'Real-time Sync', 'Monitoring']
     }
   ];
 
@@ -67,7 +80,6 @@ const Home = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white text-[#085078] font-sans selection:bg-[#9AE4CB]/30 overflow-x-hidden">
-      <ScrollProgress />
       <Sidebar />
 
       {/* Floating Name */}
@@ -87,7 +99,7 @@ const Home = () => {
             className="inline-flex items-center gap-3 px-4 py-2 bg-[#085078]/5 rounded-full text-xs font-bold uppercase tracking-widest mb-8 text-[#085078]"
           >
             <div className="w-2 h-2 rounded-full bg-[#9AE4CB] animate-pulse" />
-            Available for Freelance Projects
+            Taking on Client Projects
           </motion.div>
 
           <motion.h1
@@ -107,7 +119,7 @@ const Home = () => {
             className="flex flex-col md:flex-row gap-12 md:items-end justify-between border-t border-[#085078]/10 pt-12"
           >
             <p className="text-xl md:text-3xl font-light leading-snug max-w-2xl opacity-80">
-              I am a freelance Automation Engineer. I build the scripts, bots, and systems that act as your 24/7 digital workforce.
+              I'm an independent Automation Engineer working directly with clients. I build custom systems, bots, and solutions that act as your 24/7 digital workforce.
             </p>
             <div className="flex flex-col gap-4">
               <p className="text-sm font-bold uppercase tracking-widest opacity-40">Expertise</p>
@@ -184,11 +196,11 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <motion.div {...fadeInUp}>
               <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-12">
-                WHY HIRE<br />
-                <span className="text-[#9AE4CB]">FREELANCE?</span>
+                WHY WORK<br />
+                <span className="text-[#9AE4CB]">DIRECTLY?</span>
               </h2>
               <p className="text-xl md:text-2xl opacity-70 leading-relaxed max-w-xl">
-                Agencies overcharge and under-deliver. When you work with me, you get direct access to the engineer building your system. No middlemen, no bloat.
+                Agencies add layers of cost and complexity. When you work directly with me, you get the engineer building your system—no middlemen, no bloat, just results.
               </p>
             </motion.div>
 
@@ -310,7 +322,7 @@ const Home = () => {
       <footer className="py-20 px-6 border-t border-[#085078]/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-xs font-bold uppercase tracking-widest opacity-40">
-            © 2026 Veerendra Kumar • Freelance Automation Engineer
+            © 2026 Veerendra Kumar • Independent Automation Engineer
           </div>
           <div className="flex gap-12">
             <a href="https://github.com/veeru594" target="_blank" rel="noopener noreferrer" className="hover:text-[#9AE4CB] transition-colors font-bold uppercase tracking-wider text-sm">

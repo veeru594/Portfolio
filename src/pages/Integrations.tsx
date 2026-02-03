@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
-import ScrollProgress from '../components/ScrollProgress';
 import Sidebar from '../components/Sidebar';
 
 const Integrations = () => {
@@ -42,8 +41,6 @@ const Integrations = () => {
     <div className="min-h-screen" style={{ background: 'linear-gradient(to right, #f8f9fa 65%, #9AE4CB 65%)' }}>
       <Sidebar />
       <BackToTop />
-      <ScrollProgress />
-
       {/* Hero */}
       <section className="pt-32 pb-12 px-6">
         <div className="container mx-auto max-w-4xl text-center">

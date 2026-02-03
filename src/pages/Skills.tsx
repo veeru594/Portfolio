@@ -99,7 +99,7 @@ const Skills = () => {
                             <div className="w-12 h-[1px] bg-[#9AE4CB]"></div>
                             <span>System.Capabilities_v4.0</span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-black text-white leading-none tracking-tighter">
+                        <h1 className="heading-1 text-white">
                             BEYOND<br />THE STACK
                         </h1>
                         <p className="max-w-xl text-lg text-gray-400 font-light leading-relaxed pt-8 border-l border-gray-800 pl-8 ml-2">
@@ -129,7 +129,7 @@ const Skills = () => {
                                     </div>
                                 </div>
 
-                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#9AE4CB] transition-colors">
+                                <h3 className="heading-3 text-white mb-4 group-hover:text-[#9AE4CB] transition-colors">
                                     {stack.title}
                                 </h3>
                                 <p className="text-sm text-gray-500 mb-8 leading-relaxed italic">
@@ -174,7 +174,7 @@ const Skills = () => {
                         <h2 className="text-xs font-mono tracking-[0.6em] text-[#9AE4CB] uppercase mb-4">
               // Working_Philosophy
                         </h2>
-                        <h3 className="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter">
+                        <h3 className="heading-2 text-white uppercase italic">
                             Complexity ends here.
                         </h3>
                     </motion.div>
@@ -222,7 +222,7 @@ const Skills = () => {
                         >
                             <Activity className="w-12 h-12 mb-4 absolute -top-4 -right-4 text-[#1d2433] opacity-10 rotate-12 group-hover:rotate-45 transition-transform duration-700" />
                             <div className="relative z-10">
-                                <h3 className="text-3xl font-black mb-4 leading-tight uppercase">
+                                <h3 className="heading-3 mb-4 leading-tight uppercase">
                                     Ready to make<br />things easy?
                                 </h3>
                                 <div className="flex items-center gap-4 text-sm font-black uppercase tracking-widest border-b-2 border-[#1d2433] w-fit pb-1 group-hover:gap-6 transition-all">

@@ -48,115 +48,170 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
             mountRef.current?.appendChild(renderer.domElement);
 
             const generateMultiTarget = () => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d', { willReadFrequently: true });
-                if (!ctx) return [];
-
-                canvas.width = SAMPLE_RES;
-                canvas.height = SAMPLE_RES;
-
-                const contentWidth = 4010;
-                const contentHeight = 3180;
-                const s = Math.min(SAMPLE_RES / contentWidth, SAMPLE_RES / contentHeight) * 0.75;
-
-                ctx.translate(SAMPLE_RES / 2, SAMPLE_RES / 2);
-                ctx.scale(s, -s);
-                ctx.translate(-contentWidth / 2, -contentHeight / 2);
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 25;
-
-                const getPointsFromPaths = (paths: string[]) => {
-                    ctx.clearRect(-10000, -10000, 20000, 20000);
-                    paths.forEach(pathData => {
-                        const dMatch = pathData.match(/d="([^"]+)"/);
-                        if (dMatch) ctx.stroke(new Path2D(dMatch[1]));
-                    });
-
-                    const imageData = ctx.getImageData(0, 0, SAMPLE_RES, SAMPLE_RES).data;
-                    const pts = [];
-                    for (let y = 0; y < SAMPLE_RES; y += 3) {
-                        for (let x = 0; x < SAMPLE_RES; x += 3) {
-                            const idx = (y * SAMPLE_RES + x) * 4;
-                            if (imageData[idx + 3] > 40) {
-                                pts.push({
-                                    x: (x - SAMPLE_RES / 2) * 1.5,
-                                    y: (SAMPLE_RES / 2 - y) * 1.5 - 50,
-                                    z: (Math.random() - 0.5) * VOL_DEPTH
-                                });
-                            }
-                        }
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                    if (!ctx) {
+                        console.warn('[ParticleCanvas] Could not get 2D context');
+                        return [];
                     }
-                    return pts;
-                };
 
-                // Sample all available shapes
-                const shapePoints = shapes.map(paths => getPointsFromPaths(paths));
+                    canvas.width = SAMPLE_RES;
+                    canvas.height = SAMPLE_RES;
 
-                // Fallback for second shape if only one provided
-                if (shapePoints.length < 2) {
-                    const pts2 = [];
-                    for (let i = 0; i < (shapePoints[0]?.length || 0); i++) {
-                        const angle = Math.random() * Math.PI * 2;
-                        const radius = 250 + Math.random() * 50;
-                        pts2.push({
-                            x: Math.cos(angle) * radius,
-                            y: Math.sin(angle) * radius - 50,
-                            z: (Math.random() - 0.5) * 150
+                    const contentWidth = 4010;
+                    const contentHeight = 3180;
+                    const s = Math.min(SAMPLE_RES / contentWidth, SAMPLE_RES / contentHeight) * 0.75;
+
+                    ctx.translate(SAMPLE_RES / 2, SAMPLE_RES / 2);
+                    ctx.scale(s, -s);
+                    ctx.translate(-contentWidth / 2, -contentHeight / 2);
+                    ctx.strokeStyle = "white";
+                    ctx.lineWidth = 25;
+
+                    const getPointsFromPaths = (paths: string[]) => {
+                        try {
+                            ctx.clearRect(-10000, -10000, 20000, 20000);
+                            paths.forEach(pathData => {
+                                const dMatch = pathData.match(/d="([^"]+)"/);
+                                if (dMatch) {
+                                    try {
+                                        ctx.stroke(new Path2D(dMatch[1]));
+                                    } catch (pathError) {
+                                        console.warn('[ParticleCanvas] Invalid path:', pathError);
+                                    }
+                                }
+                            });
+
+                            const imageData = ctx.getImageData(0, 0, SAMPLE_RES, SAMPLE_RES).data;
+                            const pts = [];
+                            for (let y = 0; y < SAMPLE_RES; y += 3) {
+                                for (let x = 0; x < SAMPLE_RES; x += 3) {
+                                    const idx = (y * SAMPLE_RES + x) * 4;
+                                    if (imageData[idx + 3] > 40) {
+                                        pts.push({
+                                            x: (x - SAMPLE_RES / 2) * 1.5,
+                                            y: (SAMPLE_RES / 2 - y) * 1.5 - 50,
+                                            z: (Math.random() - 0.5) * VOL_DEPTH
+                                        });
+                                    }
+                                }
+                            }
+                            return pts;
+                        } catch (error) {
+                            console.error('[ParticleCanvas] Error processing paths:', error);
+                            return [];
+                        }
+                    };
+
+                    // Validate shapes input
+                    if (!shapes || shapes.length === 0) {
+                        console.warn('[ParticleCanvas] No shapes provided');
+                        return [];
+                    }
+
+                    // Sample all available shapes
+                    const shapePoints = shapes.map(paths => getPointsFromPaths(paths));
+
+                    // Ensure we have at least 3 shapes
+                    while (shapePoints.length < 3) {
+                        const pts = [];
+                        const baseLen = shapePoints[0]?.length || 100;
+                        for (let i = 0; i < baseLen; i++) {
+                            const angle = Math.random() * Math.PI * 2;
+                            const radius = 250 + Math.random() * 50;
+                            pts.push({
+                                x: Math.cos(angle) * radius,
+                                y: Math.sin(angle) * radius - 50,
+                                z: (Math.random() - 0.5) * 150
+                            });
+                        }
+                        shapePoints.push(pts);
+                    }
+
+                    const allParticles = [];
+                    const logoCount = 4000;
+
+                    for (let i = 0; i < logoCount; i++) {
+                        const p1 = shapePoints[0][i % shapePoints[0].length];
+                        const p2 = shapePoints[1][i % shapePoints[1].length];
+                        const p3 = shapePoints[2][i % shapePoints[2].length];
+                        allParticles.push({
+                            x1: p1.x, y1: p1.y, z1: p1.z,
+                            x2: p2.x, y2: p2.y, z2: p2.z,
+                            x3: p3.x, y3: p3.y, z3: p3.z,
+                            size: 2.5 + Math.random() * 4.5,
+                            alpha: 0.8 + Math.random() * 0.2,
+                            phase: Math.random() * Math.PI * 2,
+                            type: 0
                         });
                     }
-                    shapePoints.push(pts2);
+
+                    for (let i = 0; i < 4000; i++) {
+                        const px = (Math.random() - 0.5) * 2500;
+                        const py = (Math.random() - 0.5) * 2000;
+                        const pz = (Math.random() - 0.5) * 1200;
+                        allParticles.push({
+                            x1: px, y1: py, z1: pz,
+                            x2: px * 1.1, y2: py * 1.1, z2: pz,
+                            x3: px * 0.9, y3: py * 0.9, z3: pz,
+                            size: 1.5 + Math.random() * 4.0,
+                            alpha: 0.3 + Math.random() * 0.4,
+                            phase: Math.random() * Math.PI * 2,
+                            type: 1
+                        });
+                    }
+
+                    return allParticles;
+                } catch (error) {
+                    console.error('[ParticleCanvas] Fatal error in generateMultiTarget:', error);
+                    return [];
                 }
+            };
 
-                const allParticles = [];
-                const logoCount = 4000;
+            const sampledData = generateMultiTarget();
 
-                for (let i = 0; i < logoCount; i++) {
-                    const p1 = shapePoints[0][i % shapePoints[0].length];
-                    const p2 = shapePoints[1][i % shapePoints[1].length];
-                    allParticles.push({
-                        x1: p1.x, y1: p1.y, z1: p1.z,
-                        x2: p2.x, y2: p2.y, z2: p2.z,
-                        size: 2.5 + Math.random() * 4.5,
-                        alpha: 0.8 + Math.random() * 0.2,
+            // Create fallback particles if generation failed
+            const finalParticles = sampledData.length > 0 ? sampledData : (() => {
+                console.warn('[ParticleCanvas] Using fallback particles');
+                const fallback = [];
+                for (let i = 0; i < 2000; i++) {
+                    const angle = (i / 2000) * Math.PI * 2;
+                    const radius = 200 + Math.random() * 100;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    const z = (Math.random() - 0.5) * 100;
+                    fallback.push({
+                        x1: x, y1: y, z1: z,
+                        x2: x * 1.2, y2: y * 1.2, z2: z,
+                        x3: x * 0.8, y3: y * 0.8, z3: z,
+                        size: 2 + Math.random() * 3,
+                        alpha: 0.6 + Math.random() * 0.4,
                         phase: Math.random() * Math.PI * 2,
                         type: 0
                     });
                 }
+                return fallback;
+            })();
 
-                for (let i = 0; i < 4000; i++) {
-                    const px = (Math.random() - 0.5) * 2500;
-                    const py = (Math.random() - 0.5) * 2000;
-                    const pz = (Math.random() - 0.5) * 1200;
-                    allParticles.push({
-                        x1: px, y1: py, z1: pz,
-                        x2: px * 1.1, y2: py * 1.1, z2: pz,
-                        size: 1.5 + Math.random() * 4.0,
-                        alpha: 0.3 + Math.random() * 0.4,
-                        phase: Math.random() * Math.PI * 2,
-                        type: 1
-                    });
-                }
-
-                return allParticles;
-            };
-
-            const sampledData = generateMultiTarget();
-            if (sampledData.length === 0) return;
+            console.log(`[ParticleCanvas] Generated ${finalParticles.length} particles`);
 
             geometry = new THREE.BufferGeometry();
-            const count = sampledData.length;
+            const count = finalParticles.length;
             const posAttr = new Float32Array(count * 3);
             const targetPos1Attr = new Float32Array(count * 3);
             const targetPos2Attr = new Float32Array(count * 3);
+            const targetPos3Attr = new Float32Array(count * 3);
             const sizeAttr = new Float32Array(count);
             const alphaAttr = new Float32Array(count);
             const phaseAttr = new Float32Array(count);
             const typeAttr = new Float32Array(count);
 
-            sampledData.forEach((p, i) => {
+            finalParticles.forEach((p, i) => {
                 posAttr[i * 3] = p.x1; posAttr[i * 3 + 1] = p.y1; posAttr[i * 3 + 2] = p.z1;
                 targetPos1Attr[i * 3] = p.x1; targetPos1Attr[i * 3 + 1] = p.y1; targetPos1Attr[i * 3 + 2] = p.z1;
                 targetPos2Attr[i * 3] = p.x2; targetPos2Attr[i * 3 + 1] = p.y2; targetPos2Attr[i * 3 + 2] = p.z2;
+                targetPos3Attr[i * 3] = p.x3; targetPos3Attr[i * 3 + 1] = p.y3; targetPos3Attr[i * 3 + 2] = p.z3;
                 sizeAttr[i] = p.size;
                 alphaAttr[i] = p.alpha;
                 phaseAttr[i] = p.phase;
@@ -166,10 +221,12 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
             geometry.setAttribute('position', new THREE.BufferAttribute(posAttr, 3));
             geometry.setAttribute('targetPos1', new THREE.BufferAttribute(targetPos1Attr, 3));
             geometry.setAttribute('targetPos2', new THREE.BufferAttribute(targetPos2Attr, 3));
+            geometry.setAttribute('targetPos3', new THREE.BufferAttribute(targetPos3Attr, 3));
             geometry.setAttribute('size', new THREE.BufferAttribute(sizeAttr, 1));
             geometry.setAttribute('alpha', new THREE.BufferAttribute(alphaAttr, 1));
             geometry.setAttribute('phase', new THREE.BufferAttribute(phaseAttr, 1));
             geometry.setAttribute('pType', new THREE.BufferAttribute(typeAttr, 1));
+
 
             material = new THREE.ShaderMaterial({
                 transparent: true,
@@ -185,6 +242,7 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                 vertexShader: `
                     attribute vec3 targetPos1;
                     attribute vec3 targetPos2;
+                    attribute vec3 targetPos3;
                     attribute float size;
                     attribute float alpha;
                     attribute float phase;
@@ -228,7 +286,16 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                         vType = pType;
                         vMorphProgress = uMorphProgress;
 
-                        vec3 basePos = mix(targetPos1, targetPos2, uMorphProgress);
+                        // 3-shape morphing: 0-1 = shape1->shape2, 1-2 = shape2->shape3, 2-3 = shape3->shape1
+                        vec3 basePos;
+                        float phase = mod(uMorphProgress, 3.0);
+                        if (phase < 1.0) {
+                            basePos = mix(targetPos1, targetPos2, phase);
+                        } else if (phase < 2.0) {
+                            basePos = mix(targetPos2, targetPos3, phase - 1.0);
+                        } else {
+                            basePos = mix(targetPos3, targetPos1, phase - 2.0);
+                        }
                         vZDepth = basePos.z;
                         vPosition = basePos;
 
@@ -357,15 +424,37 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
         const handleMouseMove = (event: MouseEvent) => {
             if (!mountRef.current) return;
             const rect = mountRef.current.getBoundingClientRect();
-            mouse.current.targetX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.current.targetY = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
 
-            const aspect = rect.width / rect.height;
-            const viewSizeAtDepth = 1200;
-            mouse.current.x = mouse.current.targetX * (viewSizeAtDepth * aspect / 2);
-            mouse.current.y = mouse.current.targetY * (viewSizeAtDepth / 2);
+            // Only track mouse when it's within canvas bounds
+            const isInBounds = event.clientX >= rect.left &&
+                event.clientX <= rect.right &&
+                event.clientY >= rect.top &&
+                event.clientY <= rect.bottom;
+
+            if (isInBounds) {
+                mouse.current.targetX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.current.targetY = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+
+                const aspect = rect.width / rect.height;
+                const viewSizeAtDepth = 1200;
+                mouse.current.x = mouse.current.targetX * (viewSizeAtDepth * aspect / 2);
+                mouse.current.y = mouse.current.targetY * (viewSizeAtDepth / 2);
+            }
         };
-        window.addEventListener('mousemove', handleMouseMove);
+
+        const handleMouseLeave = () => {
+            // Reset mouse position when leaving canvas (removes hover effect)
+            mouse.current.x = 10000; // Far away position to disable effect
+            mouse.current.y = 10000;
+            mouse.current.targetX = 0;
+            mouse.current.targetY = 0;
+        };
+
+        // Add listeners to the canvas element only
+        if (mountRef.current) {
+            mountRef.current.addEventListener('mousemove', handleMouseMove);
+            mountRef.current.addEventListener('mouseleave', handleMouseLeave);
+        }
 
         const animate = (time: number) => {
             if (!material || !renderer || !scene || !camera) {
@@ -377,19 +466,54 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
             material.uniforms.uTime.value = t;
             material.uniforms.uMouse.value.set(mouse.current.x, mouse.current.y);
 
-            const cycle = 14;
+            // 3-shape morphing cycle with seamless loop
+            const cycle = 18; // 6 seconds per shape
             const tInCycle = t % cycle;
             let targetMorph = 0;
 
-            if (tInCycle > 5 && tInCycle <= 7) {
-                targetMorph = (tInCycle - 5) / 2;
-            } else if (tInCycle > 7 && tInCycle <= 12) {
-                targetMorph = 1;
-            } else if (tInCycle > 12 && tInCycle <= 14) {
-                targetMorph = 1 - (tInCycle - 12) / 2;
+            // Each shape gets 6 seconds: 4s hold + 2s transition
+            // Shape 1: 0-4s hold, 4-6s transition
+            // Shape 2: 6-10s hold, 10-12s transition  
+            // Shape 3: 12-16s hold, 16-18s transition (back to shape 1)
+
+            if (tInCycle < 4) {
+                targetMorph = 0; // Hold at shape 1
+            } else if (tInCycle < 6) {
+                targetMorph = (tInCycle - 4) / 2; // Transition 0 → 1
+            } else if (tInCycle < 10) {
+                targetMorph = 1; // Hold at shape 2
+            } else if (tInCycle < 12) {
+                targetMorph = 1 + (tInCycle - 10) / 2; // Transition 1 → 2
+            } else if (tInCycle < 16) {
+                targetMorph = 2; // Hold at shape 3
+            } else {
+                // Transition 2 → 3, shader will wrap 3 → 0 via mod(progress, 3.0)
+                targetMorph = 2 + (tInCycle - 16) / 2; // Smoothly reaches 3.0
             }
 
-            material.uniforms.uMorphProgress.value += (targetMorph - material.uniforms.uMorphProgress.value) * 0.05;
+            // Handle wrap-around for seamless looping
+            // When transitioning from shape 3 back to shape 1, we need to ensure smooth interpolation
+            let currentMorph = material.uniforms.uMorphProgress.value;
+            let diff = targetMorph - currentMorph;
+
+            // If we're wrapping around (e.g., going from 2.9 to 0.1), adjust the difference
+            // to go forward through 3.0 instead of backward
+            if (diff < -1.5) {
+                // We're wrapping forward (e.g., 2.9 → 3.0 → 0.0)
+                diff += 3.0;
+            } else if (diff > 1.5) {
+                // We're wrapping backward (shouldn't happen, but handle it)
+                diff -= 3.0;
+            }
+
+            // Apply smoothed interpolation
+            currentMorph += diff * 0.05;
+
+            // Ensure we stay within [0, 3) range
+            if (currentMorph >= 3.0) currentMorph -= 3.0;
+            if (currentMorph < 0) currentMorph += 3.0;
+
+            material.uniforms.uMorphProgress.value = currentMorph;
 
             camera.position.x += (mouse.current.targetX * 150 - camera.position.x) * 0.05;
             camera.position.y += (mouse.current.targetY * 150 - camera.position.y) * 0.05;
@@ -402,7 +526,11 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
 
         return () => {
             observer.disconnect();
-            window.removeEventListener('mousemove', handleMouseMove);
+            // Clean up canvas-level event listeners
+            if (mountRef.current) {
+                mountRef.current.removeEventListener('mousemove', handleMouseMove);
+                mountRef.current.removeEventListener('mouseleave', handleMouseLeave);
+            }
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             if (renderer && mountRef.current) mountRef.current.removeChild(renderer.domElement);
             if (geometry) geometry.dispose();

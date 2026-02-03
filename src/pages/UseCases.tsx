@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
-import ScrollProgress from '../components/ScrollProgress';
 import Sidebar from '../components/Sidebar';
 
 const UseCases = () => {
@@ -93,8 +92,6 @@ const UseCases = () => {
     <div className="min-h-screen" style={{ background: 'linear-gradient(to right, #f8f9fa 65%, #9AE4CB 65%)' }}>
       <Sidebar />
       <BackToTop />
-      <ScrollProgress />
-
       {/* Hero */}
       <section className="pt-32 pb-12 px-6">
         <div className="container mx-auto max-w-4xl text-center">
@@ -102,10 +99,10 @@ const UseCases = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-6xl md:text-7xl font-black text-white mb-4">
+            <h1 className="heading-1 text-white mb-4">
               What We Can Automate For You
             </h1>
-            <p className="text-2xl text-gray-300">
+            <p className="body-large text-gray-300">
               Real examples of automation across different industries and business functions.
             </p>
           </motion.div>
@@ -142,7 +139,7 @@ const UseCases = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-white mb-2">{useCase.title}</h3>
+                <h3 className="heading-3 text-white mb-2">{useCase.title}</h3>
                 <p className="text-cyan-400 font-semibold mb-4">{useCase.industry}</p>
 
                 {/* Problem */}
@@ -193,7 +190,7 @@ const UseCases = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl font-black text-white mb-4">
+            <h2 className="heading-2 text-white mb-4">
               Don't see your use case?
             </h2>
             <p className="text-xl text-gray-300 mb-8">

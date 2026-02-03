@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Github, CheckCircle2, Globe, Sparkles, Zap, Target, GraduationCap, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
-import ScrollProgress from '../components/ScrollProgress';
 import Sidebar from '../components/Sidebar';
 import FloatingName from '../components/FloatingName';
 
@@ -70,9 +69,7 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#085078] font-sans selection:bg-[#9AE4CB]/30 overflow-x-hidden">
-      <BackToTop />
-      <ScrollProgress />
-      <Sidebar />
+      <BackToTop />      <Sidebar />
 
       {/* Floating Name (Top Left) */}
       <FloatingName />
@@ -123,8 +120,8 @@ const Portfolio = () => {
       <section className="py-40 px-6 border-y border-[#085078]/5 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-start">
           <motion.div {...fadeInUp} className="space-y-12">
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">The Journey.</h2>
-            <div className="space-y-8 text-xl md:text-2xl font-light leading-relaxed opacity-80">
+            <h2 className="heading-2">The Journey.</h2>
+            <div className="space-y-8 body-large opacity-80">
               <p>
                 My path started with a deep fascination for how systems interact. During my B.Tech, I realized that the most powerful application of engineering wasn't just building standalone tools, but creating <span className="text-[#085078] font-normal">connected ecosystems</span>.
               </p>
@@ -169,7 +166,7 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto text-center">
           <motion.div {...fadeInUp} className="space-y-8 max-w-4xl mx-auto">
             <h2 className="text-xs font-bold uppercase tracking-[0.5em] text-[#9AE4CB]">My Commitment</h2>
-            <blockquote className="text-3xl md:text-6xl font-bold tracking-tighter leading-tight italic">
+            <blockquote className="heading-1 leading-tight italic">
               "I build intelligent systems that simplify complexity and drive real business growth."
             </blockquote>
             <p className="text-xl md:text-2xl font-light opacity-60 leading-relaxed pt-8">
@@ -183,7 +180,7 @@ const Portfolio = () => {
       <section className="py-40 px-6 bg-[#085078]/[0.02]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-12">
-            <motion.h2 {...fadeInUp} className="text-6xl md:text-8xl font-bold tracking-tighter">
+            <motion.h2 {...fadeInUp} className="heading-1">
               THE WORK.
             </motion.h2>
             <motion.p {...fadeInUp} className="text-lg md:text-xl font-light opacity-60 max-w-md">
@@ -218,7 +215,7 @@ const Portfolio = () => {
                     <span className="text-xs font-bold uppercase tracking-[0.3em] text-[#9AE4CB]">
                       {project.category}
                     </span>
-                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none">
+                    <h2 className="heading-2 leading-none">
                       {project.title}
                     </h2>
                   </div>
@@ -273,7 +270,7 @@ const Portfolio = () => {
       <section className="py-40 px-6 bg-[#085078]">
         <div className="max-w-7xl mx-auto">
           <motion.div {...fadeInUp} className="max-w-4xl space-y-12">
-            <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter">
+            <h2 className="heading-2 text-white">
               THE<br />TOOLKIT.
             </h2>
             <div className="grid md:grid-cols-2 gap-20">
