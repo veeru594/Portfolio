@@ -193,6 +193,8 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                     varying float vDist;
                     varying float vType;
                     varying float vZDepth;
+                    varying float vMorphProgress;
+                    varying vec3 vPosition;
                     uniform float uTime;
                     uniform vec2 uMouse;
                     uniform float uVolDepth;
@@ -224,34 +226,44 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                     void main() {
                         vAlpha = alpha;
                         vType = pType;
+                        vMorphProgress = uMorphProgress;
 
                         vec3 basePos = mix(targetPos1, targetPos2, uMorphProgress);
                         vZDepth = basePos.z;
+                        vPosition = basePos;
 
                         vec3 pos = basePos;
+                        
+                        // Reduced organic movement for stability
                         float nScale = pType > 0.5 ? 0.001 : 0.003;
-                        float nFreq = pType > 0.5 ? 0.1 : 0.4;
+                        float nFreq = pType > 0.5 ? 0.02 : 0.08;  // Reduced from 0.05/0.2
                         float nx = snoise(vec2(basePos.x * nScale + uTime * nFreq, basePos.y * nScale));
                         float ny = snoise(vec2(basePos.y * nScale + uTime * nFreq, basePos.x * nScale));
                         
-                        pos.x += nx * (pType > 0.5 ? 80.0 : 20.0);
-                        pos.y += ny * (pType > 0.5 ? 80.0 : 20.0);
-                        pos.z += snoise(vec2(basePos.z * nScale, uTime * 0.2)) * 15.0;
+                        pos.x += nx * (pType > 0.5 ? 12.0 : 4.0);  // Reduced from 30/10
+                        pos.y += ny * (pType > 0.5 ? 12.0 : 4.0);  // Reduced from 30/10
+                        pos.z += snoise(vec2(basePos.z * nScale, uTime * 0.2)) * 5.0;  // Reduced from 15
 
-                        pos.x += cos(uTime * (pType > 0.5 ? 0.4 : 1.2) + phase) * 8.0;
-                        pos.y += sin(uTime * (pType > 0.5 ? 0.4 : 1.2) + phase) * 8.0;
+                        pos.x += cos(uTime * (pType > 0.5 ? 0.2 : 0.6) + phase) * 1.5;  // Reduced from 4.0
+                        pos.y += sin(uTime * (pType > 0.5 ? 0.2 : 0.6) + phase) * 1.5;  // Reduced from 4.0
 
+                        // Enhanced mouse interaction with scaling
                         float dist = distance(uMouse, pos.xy);
                         vDist = dist;
-                        float iRad = pType > 0.5 ? 250.0 : 150.0;
+                        float iRad = pType > 0.5 ? 280.0 : 180.0;
+                        float particleScale = 1.0;
+                        
                         if(dist < iRad) {
                             float force = pow(1.0 - dist / iRad, 3.0);
                             vec2 dir = normalize(pos.xy - uMouse);
                             pos.xy += dir * force * 60.0;
+                            
+                            // Scale particles near cursor (hover effect)
+                            particleScale = 1.0 + force * 0.8;
                         }
 
                         vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-                        gl_PointSize = size * (1500.0 / -mvPosition.z);
+                        gl_PointSize = size * particleScale * (1500.0 / -mvPosition.z);
                         gl_Position = projectionMatrix * mvPosition;
                     }
                 `,
@@ -260,6 +272,8 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                     varying float vDist;
                     varying float vType;
                     varying float vZDepth;
+                    varying float vMorphProgress;
+                    varying vec3 vPosition;
                     uniform float uTime;
                     uniform float uVolDepth;
 
@@ -267,17 +281,54 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                         float r = distance(gl_PointCoord, vec2(0.5));
                         if (r > 0.5) discard;
 
-                        float strength = pow(1.0 - (r * 2.0), 1.3);
-                        vec3 tint = vec3(1.0); 
-
-                        float pulse = 0.8 + 0.2 * sin(uTime * 2.0 + vZDepth * 0.01);
-                        float finalAlpha = vAlpha * strength * pulse;
+                        // Soft glow with enhanced falloff
+                        float strength = pow(1.0 - (r * 2.0), 1.8);
+                        float glow = pow(1.0 - (r * 2.0), 0.6) * 0.4;
                         
-                        if(vType > 0.5) {
-                            finalAlpha *= 0.5;
+                        // Color gradient based on morph progress
+                        // Champagne Pink #E6D4C7 (0.902, 0.831, 0.780)
+                        // Cyan/Teal #9AE4CB (0.604, 0.894, 0.796)
+                        vec3 colorChampagne = vec3(0.902, 0.831, 0.780);
+                        vec3 colorCyan = vec3(0.604, 0.894, 0.796);
+                        
+                        // Smooth color transition during morphing
+                        float colorMix = smoothstep(0.2, 0.8, vMorphProgress);
+                        vec3 baseColor = mix(colorChampagne, colorCyan, colorMix);
+                        
+                        // Add variation based on position for depth
+                        float positionHue = sin(vPosition.x * 0.005 + vPosition.y * 0.005) * 0.1;
+                        baseColor += vec3(positionHue * 0.2, positionHue * 0.3, positionHue * 0.2);
+                        
+                        // Subtle glow during transitions (very gentle)
+                        float transitionGlow = 0.0;
+                        if(vMorphProgress > 0.2 && vMorphProgress < 0.35) {
+                            transitionGlow = sin((vMorphProgress - 0.2) * 6.28 / 0.15) * 0.15;
+                        } else if(vMorphProgress > 0.65 && vMorphProgress < 0.8) {
+                            transitionGlow = sin((vMorphProgress - 0.65) * 6.28 / 0.15) * 0.15;
+                        }
+                        
+                        // Enhanced glow near cursor
+                        float cursorGlow = 0.0;
+                        if(vDist < 300.0) {
+                            cursorGlow = (1.0 - vDist / 300.0) * 0.4;
                         }
 
-                        gl_FragColor = vec4(tint, finalAlpha);
+                        // Pulse effect with depth variation
+                        float pulse = 0.85 + 0.15 * sin(uTime * 2.5 + vZDepth * 0.01);
+                        
+                        // Combine all effects
+                        float finalStrength = strength + glow + transitionGlow + cursorGlow;
+                        float finalAlpha = vAlpha * finalStrength * pulse;
+                        
+                        // Reduce ambient particle visibility
+                        if(vType > 0.5) {
+                            finalAlpha *= 0.4;
+                        }
+
+                        // Boost brightness during transitions
+                        vec3 finalColor = baseColor * (1.0 + transitionGlow * 0.8 + cursorGlow);
+
+                        gl_FragColor = vec4(finalColor, finalAlpha);
                     }
                 `
             });

@@ -5,6 +5,7 @@ import Contact from '../components/Contact';
 import BackToTop from '../components/BackToTop';
 import ScrollProgress from '../components/ScrollProgress';
 import Sidebar from '../components/Sidebar';
+import FloatingName from '../components/FloatingName';
 
 const ContactPage = () => {
   const contactMethods = [
@@ -46,11 +47,7 @@ const ContactPage = () => {
       <Sidebar />
 
       {/* Floating Name (Top Left) */}
-      <div className="fixed top-8 left-8 z-50">
-        <Link to="/" className="text-xl font-bold tracking-tighter outline-none" style={{ color: '#085078' }}>
-          Veerendra Kumar
-        </Link>
-      </div>
+      <FloatingName />
 
       {/* Hero Section */}
       <section className="py-40 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(to right, #f8f9fa 65%, #9AE4CB 65%)' }}>
