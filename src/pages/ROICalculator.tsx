@@ -3,6 +3,8 @@ import { Zap, DollarSign, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import BackToTop from '../components/BackToTop';
+import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 
 const ROICalculator = () => {
   const [hoursPerDay, setHoursPerDay] = useState(5);
@@ -25,6 +27,7 @@ const ROICalculator = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
+      <Sidebar theme="dark" />
       <BackToTop />
       {/* Hero */}
       <section className="pt-32 pb-12 px-6">
@@ -238,6 +241,7 @@ const ROICalculator = () => {
           </motion.div>
         </div>
       </section>
+      <Footer variant="main" theme="dark" />
     </div>
   );
 };

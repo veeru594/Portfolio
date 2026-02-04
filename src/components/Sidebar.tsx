@@ -1,37 +1,48 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const Sidebar = () => {
+interface SidebarProps {
+    theme?: 'light' | 'dark';
+}
+
+const Sidebar = ({ theme = 'light' }: SidebarProps) => {
     const location = useLocation();
     const currentPath = location.pathname;
 
+    const textColor = theme === 'light' ? 'text-[#085078]' : 'text-white';
+    const textOpacity = theme === 'light' ? 'text-[#085078]/30' : 'text-white/30';
+
     const navLinks = [
-        { path: '/', label: 'Intro' },
+        { path: '/', label: 'Home' },
         { path: '/home', label: 'Work' },
         { path: '/skills', label: 'Skills' },
         { path: '/portfolio', label: 'Portfolio' },
         { path: '/contact', label: 'Contact' },
     ];
 
-    // Filter out the current page from the sidebar
-    const activeLinks = navLinks.filter(link => link.path !== currentPath);
-
     return (
-        <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end">
-            <div className="flex flex-col gap-12 items-center">
-                {activeLinks.map((link) => (
-                    <Link
-                        key={link.path}
-                        to={link.path}
-                        className="text-gray-400 hover:text-[#085078] transition-all text-sm font-bold uppercase tracking-[0.2em] whitespace-nowrap"
-                        style={{
-                            writingMode: 'vertical-rl',
-                            transform: 'rotate(180deg)',
-                            display: 'inline-block'
-                        }}
-                    >
-                        {link.label}
-                    </Link>
-                ))}
+        <nav className="fixed right-10 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end">
+            <div className="flex flex-col gap-14 items-center">
+                {navLinks
+                    .filter(link => link.path !== currentPath)
+                    .map((link) => (
+                        <div key={link.path} className="relative group flex items-center justify-center">
+                            {/* Vertical Label */}
+                            <Link
+                                to={link.path}
+                                className={`transition-all duration-300 text-xs font-black uppercase tracking-[0.4em] whitespace-nowrap ${textOpacity} hover:${textColor}`}
+                                style={{
+                                    writingMode: 'vertical-rl',
+                                    transform: 'rotate(180deg)',
+                                    display: 'inline-block'
+                                }}
+                            >
+                                {link.label}
+                            </Link>
+
+                            {/* Hover Dot / Indicator */}
+                            <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#9AE4CB] transition-all duration-500 opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-110" />
+                        </div>
+                    ))}
             </div>
         </nav>
     );

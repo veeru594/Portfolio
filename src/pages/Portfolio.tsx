@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
 import Sidebar from '../components/Sidebar';
 import FloatingName from '../components/FloatingName';
+import Footer from '../components/Footer';
 
 const Portfolio = () => {
   const projects = [
@@ -339,21 +340,8 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-[#085078]/5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 items-center">
-          <div className="text-xs font-bold uppercase tracking-widest opacity-40">
-            © 2026 Veerendra Kumar • Consolidating Intelligence
-          </div>
-          <div className="flex gap-12">
-            <a href="https://github.com/veeru594" target="_blank" rel="noopener noreferrer" className="hover:text-[#9AE4CB] transition-colors">
-              <Github className="w-10 h-10" />
-            </a>
-            <a href="https://www.linkedin.com/in/veerendra-kumar0618/" target="_blank" rel="noopener noreferrer" className="hover:text-[#9AE4CB] transition-colors">
-              <ExternalLink className="w-10 h-10" />
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Footer */}
+      <Footer variant="main" theme="light" />
     </div>
   );
 };

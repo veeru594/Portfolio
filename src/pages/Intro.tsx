@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ParticleCanvas from '../components/ParticleCanvas';
 
 import { CODE_SYMBOL_PATHS, ROBOT_SYMBOL_PATHS } from '../constants/particlePaths';
+import Footer from '../components/Footer';
 
 /**
  * PREMIUM PERSONAL INTRO PAGE
@@ -28,12 +29,12 @@ const Intro = () => {
     };
 
     return (
-        <div className="min-h-screen text-[#273B3A] selection:bg-[#273B3A]/20 antialiased overflow-x-hidden bg-[#E6D4C7]">
+        <div className="min-h-screen text-[#273B3A] selection:bg-[#273B3A]/20 antialiased overflow-x-hidden bg-[#D8C7B5]">
 
             {/* 1. HERO SECTION (Split Background) */}
-            <section className="min-h-screen flex items-center relative overflow-hidden" style={{ background: 'linear-gradient(to right, #E6D4C7 65%, #273B3A 65%)' }}>
+            <section className="min-h-screen flex items-center relative overflow-hidden" style={{ background: 'linear-gradient(to right, #D8C7B5 65%, #5d706fff 65%)' }}>
                 {/* Left Side: Content */}
-                <div className="w-full lg:w-[65%] px-8 md:px-24 lg:px-40 py-24 relative z-10">
+                <div className="w-full lg:w-[65%] px-8 md:px-24 lg:px-32 py-24 relative z-10">
                     <motion.div
                         initial="hidden"
                         animate="visible"
@@ -46,8 +47,8 @@ const Intro = () => {
                                 <h1 className="text-sm tracking-[0.3em] font-medium text-[#273B3A] uppercase">
                                     Veerendra Kumar
                                 </h1>
-                                <h2 className="heading-1 text-[#273B3A]">
-                                    Automation Engineer
+                                <h2 className="text-[9vw] md:text-[4.5vw] lg:text-[3.8vw] font-bold tracking-tight leading-tight text-[#273B3A] whitespace-nowrap">
+                                    AUTOMATION ENGINEER
                                 </h2>
                             </motion.div>
 
@@ -71,6 +72,13 @@ const Intro = () => {
                                 className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
                             >
                                 <span className="relative z-10 text-[#273B3A]">[ Portfolio ]</span>
+                                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#273B3A]/20 group-hover:bg-[#273B3A] transition-colors" />
+                            </Link>
+                            <Link
+                                to="/skills"
+                                className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
+                            >
+                                <span className="relative z-10 text-[#273B3A]">[ Skills ]</span>
                                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#273B3A]/20 group-hover:bg-[#273B3A] transition-colors" />
                             </Link>
                             <Link
@@ -103,7 +111,7 @@ const Intro = () => {
             </section>
 
             {/* 2. PHILOSOPHY SECTION (Solid Background) */}
-            <section className="bg-[#E6D4C7] text-[#273B3A] py-40 px-8 md:px-24 lg:px-40 min-h-[70vh] flex items-center border-t border-[#273B3A]/10 relative z-20">
+            <section className="bg-[#D8C7B5] text-[#273B3A] py-40 px-8 md:px-24 lg:px-40 min-h-[70vh] flex items-center border-t border-[#273B3A]/10 relative z-20">
                 <div className="max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
                         <div className="space-y-12">
@@ -122,7 +130,7 @@ const Intro = () => {
                                 to="/home"
                                 className="inline-flex items-center gap-4 text-sm font-bold tracking-[0.2em] uppercase group text-[#273B3A]"
                             >
-                                <span>Read more about my approach</span>
+                                <span>READ MORE ABOUT MY APPROACH</span>
                                 <span className="group-hover:translate-x-2 transition-transform">→</span>
                             </Link>
                         </div>
@@ -131,32 +139,8 @@ const Intro = () => {
             </section>
 
             {/* 3. FOOTER (Transparent) */}
-            <footer className="bg-transparent text-[#273B3A]/60 py-24 px-8 md:px-24 lg:px-40 border-t border-[#273B3A]/10 relative z-20">
-                <div className="max-w-4xl flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-                    <div className="space-y-2">
-                        <p className="text-[#273B3A] text-sm tracking-widest uppercase">Veerendra Kumar</p>
-                        <p className="text-xs tracking-widest uppercase opacity-50">© 2024 Systemized Excellence</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                        <p className="text-xs tracking-[0.3em] uppercase mb-4 text-[#273B3A]">Navigation</p>
-                        <div className="flex gap-8">
-                            <Link to="/home" className="hover:text-[#273B3A] transition-colors uppercase tracking-widest text-xs">Work</Link>
-                            <Link to="/portfolio" className="hover:text-[#273B3A] transition-colors uppercase tracking-widest text-xs">Portfolio</Link>
-                            <Link to="/contact" className="hover:text-[#273B3A] transition-colors uppercase tracking-widest text-xs">Contact</Link>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-end">
-                        <div className="flex items-center gap-3">
-                            <div className="w-1.5 h-1.5 bg-[#273B3A] rounded-full animate-pulse" />
-                            <p className="text-[10px] tracking-[0.4em] uppercase font-medium text-[#273B3A]/60">
-                                System Status: Active
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {/* 3. FOOTER (Main) */}
+            <Footer variant="main" theme="light" className="!bg-[#D8C7B5]" />
 
         </div>
     );

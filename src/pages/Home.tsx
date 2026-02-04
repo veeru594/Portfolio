@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { MessageCircle, Code2, Mail, Instagram, Youtube, FileText, Sparkles, ArrowRight, CheckCircle2, Zap, Clock, Shield } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import FloatingName from '../components/FloatingName';
+import Footer from '../components/Footer';
 
 const Home = () => {
   const containerRef = useRef(null);
@@ -145,47 +146,61 @@ const Home = () => {
             </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group p-8 bg-gray-50 border border-gray-100 dark:border-[#085078]/10 rounded-2xl hover:bg-[#085078] hover:text-white transition-all duration-300 relative overflow-hidden"
-              >
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#9AE4CB]/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {services.map((service, index) => {
+              const spans = [
+                'md:col-span-8', 'md:col-span-4',
+                'md:col-span-4', 'md:col-span-4', 'md:col-span-4',
+                'md:col-span-6', 'md:col-span-6',
+                'md:col-span-12'
+              ];
 
-                <div className="relative z-10 flex flex-col h-full justify-between gap-8">
-                  <div className="flex justify-between items-start">
-                    <div className="p-3 bg-white text-[#085078] rounded-xl shadow-sm group-hover:scale-110 transition-transform">
-                      {service.icon}
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className={`group relative overflow-hidden rounded-3xl p-8 transition-all duration-500 ${spans[index]} bg-slate-50 border border-slate-100 hover:border-[#9AE4CB]/30 hover:shadow-[0_20px_40px_-15px_rgba(8,80,120,0.05)]`}
+                >
+                  {/* Stencil Number Background */}
+                  <div className="absolute -right-4 -bottom-4 text-[12vw] md:text-[8vw] font-black text-slate-200/40 select-none pointer-events-none transition-colors group-hover:text-[#9AE4CB]/10 leading-none">
+                    0{index + 1}
+                  </div>
+
+                  {/* Gradient Glow on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#9AE4CB]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex justify-between items-start mb-12">
+                      <div className="p-4 bg-white text-[#085078] rounded-2xl shadow-sm border border-slate-50 group-hover:scale-110 group-hover:bg-[#085078] group-hover:text-white transition-all duration-500">
+                        {service.icon}
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#085078]/40 group-hover:text-[#9AE4CB] transition-colors">
+                        {service.tag}
+                      </span>
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-60 group-hover:text-[#9AE4CB]">
-                      {service.tag}
-                    </span>
-                  </div>
 
-                  <div>
-                    <h3 className="text-2xl font-bold mb-4">{service.name}</h3>
-                    <p className="text-lg leading-relaxed opacity-70 group-hover:opacity-90 mb-6">
-                      {service.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {service.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm font-medium opacity-60 group-hover:opacity-100">
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#9AE4CB]" />
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-auto">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight group-hover:text-[#085078] transition-colors">{service.name}</h3>
+                      <p className="text-lg leading-relaxed opacity-60 group-hover:opacity-80 mb-8 max-w-md">
+                        {service.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-3">
+                        {service.benefits.map((benefit, i) => (
+                          <div key={i} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-slate-100 text-xs font-bold uppercase tracking-wider text-[#085078]/60 group-hover:bg-[#085078]/5 group-hover:text-[#085078] group-hover:border-[#085078]/10 transition-all">
+                            <CheckCircle2 className="w-3 h-3 text-[#9AE4CB]" />
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -319,21 +334,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-[#085078]/5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="text-xs font-bold uppercase tracking-widest opacity-40">
-            © 2026 Veerendra Kumar • Independent Automation Engineer
-          </div>
-          <div className="flex gap-12">
-            <a href="https://github.com/veeru594" target="_blank" rel="noopener noreferrer" className="hover:text-[#9AE4CB] transition-colors font-bold uppercase tracking-wider text-sm">
-              Github
-            </a>
-            <a href="https://www.linkedin.com/in/veerendra-kumar0618/" target="_blank" rel="noopener noreferrer" className="hover:text-[#9AE4CB] transition-colors font-bold uppercase tracking-wider text-sm">
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer variant="main" theme="light" />
     </div>
   );
 };

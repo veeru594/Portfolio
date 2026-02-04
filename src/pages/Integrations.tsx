@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 
 const Integrations = () => {
   const tools = [
@@ -193,6 +194,7 @@ const Integrations = () => {
           </motion.div>
         </div>
       </section>
+      <Footer variant="main" theme="light" className="bg-[#f8f9fa]" />
     </div>
   );
 };

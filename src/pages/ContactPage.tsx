@@ -3,6 +3,7 @@ import Contact from '../components/Contact';
 import BackToTop from '../components/BackToTop';
 import Sidebar from '../components/Sidebar';
 import FloatingName from '../components/FloatingName';
+import Footer from '../components/Footer';
 
 const ContactPage = () => {
   return (
@@ -166,11 +167,8 @@ const ContactPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-white border-t border-gray-100 text-center">
-        <p className="text-gray-400 text-xs uppercase tracking-widest font-semibold">
-          © 2026 Veerendra Kumar • Automation Done Right
-        </p>
-      </footer>
+      {/* Footer */}
+      <Footer variant="main" theme="light" />
     </div>
   );
 };

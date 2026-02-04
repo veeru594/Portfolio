@@ -3,6 +3,7 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BackToTop from '../components/BackToTop';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 
 const UseCases = () => {
   const useCases = [
@@ -206,6 +207,7 @@ const UseCases = () => {
           </motion.div>
         </div>
       </section>
+      <Footer variant="main" theme="light" className="bg-[#f8f9fa]" />
     </div>
   );
 };

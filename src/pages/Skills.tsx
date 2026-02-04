@@ -9,6 +9,7 @@ import {
     ShieldCheck, RefreshCw, ArrowRight
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 
 const Skills = () => {
     const architecturalStacks = [
@@ -76,7 +77,7 @@ const Skills = () => {
 
     return (
         <div className="min-h-screen relative overflow-hidden text-[#d1d5db] font-sans" style={{ background: 'linear-gradient(to right, #1d2433 65%, #242d3d 65%)' }}>
-            <Sidebar />
+            <Sidebar theme="dark" />
 
             {/* Structural Elements (Background) */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
@@ -233,11 +234,11 @@ const Skills = () => {
                     </Link>
                 </section>
 
-                {/* Footer Coordinate */}
-                <div className="mt-40 pt-8 border-t border-gray-800/30 flex justify-between items-center text-[10px] font-mono text-gray-700 tracking-tighter">
-                    <div>LOC_LAT: 17.3850° N / LOC_LONG: 78.4867° E</div>
-                    <div>PHILOSOPHY_STABLE: TRUE</div>
-                </div>
+            </div>
+
+            {/* Footer Coordinate */}
+            <div className="relative z-20 mt-20">
+                <Footer variant="main" theme="dark" />
             </div>
         </div>
     );
