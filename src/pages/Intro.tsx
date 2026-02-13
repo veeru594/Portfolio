@@ -62,6 +62,7 @@ const Intro = () => {
                         <motion.div variants={fadeUp} className="flex flex-wrap gap-8 items-center">
                             <Link
                                 to="/home"
+                                aria-label="View my work"
                                 className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
                             >
                                 <span className="relative z-10 text-[#273B3A]">[ Work ]</span>
@@ -69,6 +70,7 @@ const Intro = () => {
                             </Link>
                             <Link
                                 to="/portfolio"
+                                aria-label="View my portfolio"
                                 className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
                             >
                                 <span className="relative z-10 text-[#273B3A]">[ Portfolio ]</span>
@@ -76,6 +78,7 @@ const Intro = () => {
                             </Link>
                             <Link
                                 to="/skills"
+                                aria-label="View my skills"
                                 className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
                             >
                                 <span className="relative z-10 text-[#273B3A]">[ Skills ]</span>
@@ -83,6 +86,7 @@ const Intro = () => {
                             </Link>
                             <Link
                                 to="/contact"
+                                aria-label="Contact me"
                                 className="group relative overflow-hidden text-lg tracking-widest uppercase py-2"
                             >
                                 <span className="relative z-10 text-[#273B3A]">[ Contact ]</span>

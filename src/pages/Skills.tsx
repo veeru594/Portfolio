@@ -38,7 +38,7 @@ const Skills = () => {
                 "Deep Learning Architectures",
                 "Pandas & Data Visualization"
             ],
-            icon: <Layers className="w-5 h-5 text-[#aae4ff]" />,
+            icon: <Layers className="w-5 h-5 text-[#9AE4CB]" />,
             tags: ["Next.js", "Python", "SQL", "PyTorch"]
         },
         {
@@ -52,7 +52,7 @@ const Skills = () => {
                 "Unix Systems & VS Code Ops",
                 "Low-Level Reliability (C Lang)"
             ],
-            icon: <Settings className="w-5 h-5 text-[#ff8c1a]" />,
+            icon: <Settings className="w-5 h-5 text-[#9AE4CB]" />,
             tags: ["CI/CD", "Git", "DevOps", "AI Dev"]
         }
     ];
@@ -66,12 +66,12 @@ const Skills = () => {
         {
             title: "Efficiency by Design",
             description: "Every line of code and every automation node is built with one focus: speed-to-action. If it doesn't make things faster, it doesn't belong.",
-            icon: <RefreshCw className="w-6 h-6 text-[#aae4ff]" />
+            icon: <RefreshCw className="w-6 h-6 text-[#9AE4CB]" />
         },
         {
             title: "Making Things Easy",
             description: "Systems should be invisible. I design workflows that work for you, not the other way around. Intelligence should feel like magic, but run like a clock.",
-            icon: <Lightbulb className="w-6 h-6 text-[#ff8c1a]" />
+            icon: <Lightbulb className="w-6 h-6 text-[#9AE4CB]" />
         }
     ];
 
@@ -210,11 +210,11 @@ const Skills = () => {
                         <p className="text-2xl text-white font-light leading-snug">
                             Every system I build is designed
                             to <span className="text-[#9AE4CB] font-bold italic">reduce friction</span> and
-                            maximize <span className="text-[#aae4ff] font-bold italic">autonomous</span> decision-making.
+                            maximize <span className="text-[#9AE4CB] font-bold italic">autonomous</span> decision-making.
                         </p>
                     </div>
 
-                    <Link to="/contact">
+                    <Link to="/contact" aria-label="Start system integration and contact Veerandra">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}

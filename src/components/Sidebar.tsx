@@ -8,9 +8,6 @@ const Sidebar = ({ theme = 'light' }: SidebarProps) => {
     const location = useLocation();
     const currentPath = location.pathname;
 
-    const textColor = theme === 'light' ? 'text-[#085078]' : 'text-white';
-    const textOpacity = theme === 'light' ? 'text-[#085078]/30' : 'text-white/30';
-
     const navLinks = [
         { path: '/', label: 'Home' },
         { path: '/home', label: 'Work' },
@@ -20,7 +17,7 @@ const Sidebar = ({ theme = 'light' }: SidebarProps) => {
     ];
 
     return (
-        <nav className="fixed right-10 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end">
+        <nav className="fixed right-10 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-end" aria-label="Page navigation">
             <div className="flex flex-col gap-14 items-center">
                 {navLinks
                     .filter(link => link.path !== currentPath)
@@ -29,7 +26,8 @@ const Sidebar = ({ theme = 'light' }: SidebarProps) => {
                             {/* Vertical Label */}
                             <Link
                                 to={link.path}
-                                className={`transition-all duration-300 text-xs font-black uppercase tracking-[0.4em] whitespace-nowrap ${textOpacity} hover:${textColor}`}
+                                aria-label={`Go to ${link.label}`}
+                                className={`transition-all duration-300 text-xs font-black uppercase tracking-[0.4em] whitespace-nowrap ${theme === 'light' ? 'text-[#085078]/30 hover:text-[#085078]' : 'text-white/30 hover:text-white'}`}
                                 style={{
                                     writingMode: 'vertical-rl',
                                     transform: 'rotate(180deg)',

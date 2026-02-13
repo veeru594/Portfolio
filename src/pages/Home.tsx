@@ -1,17 +1,11 @@
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageCircle, Code2, Mail, Instagram, Youtube, FileText, Sparkles, ArrowRight, CheckCircle2, Zap, Clock, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MessageCircle, Code2, Mail, FileText, Sparkles, ArrowRight, CheckCircle2, Zap, Clock, Shield } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import FloatingName from '../components/FloatingName';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
 
   const services = [
     {
@@ -72,66 +66,128 @@ const Home = () => {
     }
   ];
 
-  const fadeInUp: any = {
+  const fadeInUp = {
     initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-  };
+  } as const;
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-white text-[#085078] font-sans selection:bg-[#9AE4CB]/30 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#085078] font-sans selection:bg-[#9AE4CB]/30 overflow-x-hidden">
       <Sidebar />
 
       {/* Floating Name */}
       <FloatingName />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center px-6 relative overflow-hidden bg-gradient-to-br from-[#f8f9fa] to-[#eef2f5]">
-        {/* Abstract shapes adhering to palette */}
-        <div className="absolute right-0 top-0 w-[50vh] h-[50vh] bg-[#9AE4CB]/10 rounded-full blur-[100px]" />
-        <div className="absolute left-0 bottom-0 w-[60vh] h-[60vh] bg-[#085078]/5 rounded-full blur-[120px]" />
+      <section className="min-h-screen flex items-center px-6 relative overflow-hidden bg-gradient-to-br from-white via-[#f0f7fa] to-[#e8f4f0]">
+        {/* Ambient gradient orbs */}
+        <motion.div
+          className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] rounded-full blur-[120px]"
+          style={{ background: 'radial-gradient(circle, rgba(154,228,203,0.15) 0%, transparent 70%)' }}
+          animate={{ scale: [1, 1.15, 1], x: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="absolute left-[-5%] bottom-[-10%] w-[50vh] h-[50vh] bg-[#085078]/5 rounded-full blur-[100px]" />
+
+        {/* Subtle grid texture */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(#085078 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        {/* Editorial watermark */}
+        <div className="absolute right-[5%] top-[15%] text-[25vw] font-black text-[#085078]/[0.02] leading-none select-none pointer-events-none tracking-tighter">
+          01
+        </div>
+
+        {/* Vertical accent line */}
+        <motion.div
+          className="absolute left-12 top-[20%] w-[1px] h-[25%] bg-gradient-to-b from-transparent via-[#9AE4CB] to-transparent hidden md:block"
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          transition={{ delay: 0.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        />
 
         <div className="max-w-7xl mx-auto w-full relative z-10 pt-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-3 px-4 py-2 bg-[#085078]/5 rounded-full text-xs font-bold uppercase tracking-widest mb-8 text-[#085078]"
+            className="inline-flex items-center gap-3 px-5 py-2.5 bg-[#9AE4CB]/10 border border-[#9AE4CB]/20 rounded-full text-xs font-bold uppercase tracking-widest mb-10 text-[#085078]"
           >
             <div className="w-2 h-2 rounded-full bg-[#9AE4CB] animate-pulse" />
             Taking on Client Projects
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-[10vw] md:text-[8vw] font-bold leading-[0.9] tracking-tighter mb-12"
+          {/* Staggered heading with stroke contrast */}
+          <div className="mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[10vw] md:text-[8vw] font-bold leading-[0.9] tracking-tighter text-transparent"
+              style={{ WebkitTextStroke: '1.5px #085078' }}
+            >
+              ENGINEERING
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[10vw] md:text-[8vw] font-bold leading-[0.9] tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#9AE4CB] to-[#6BC5A0]"
+            >
+              EFFICIENCY.
+            </motion.div>
+          </div>
+
+          {/* Typographic credibility strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-wrap items-center gap-4 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-[#085078]/30 mb-12"
           >
-            ENGINEERING<br />
-            <span className="text-[#9AE4CB]">EFFICIENCY.</span>
-          </motion.h1>
+            <span>AI Systems</span>
+            <span className="w-4 h-[1px] bg-[#9AE4CB]" />
+            <span>Workflow Automation</span>
+            <span className="w-4 h-[1px] bg-[#9AE4CB]" />
+            <span>Full-Stack Engineering</span>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
             className="flex flex-col md:flex-row gap-12 md:items-end justify-between border-t border-[#085078]/10 pt-12"
           >
-            <p className="text-xl md:text-3xl font-light leading-snug max-w-2xl opacity-80">
+            <p className="text-xl md:text-3xl font-light leading-snug max-w-2xl text-[#085078]/70">
               I'm an independent Automation Engineer working directly with clients. I build custom systems, bots, and solutions that act as your 24/7 digital workforce.
             </p>
             <div className="flex flex-col gap-4">
-              <p className="text-sm font-bold uppercase tracking-widest opacity-40">Expertise</p>
-              <ul className="text-lg font-medium space-y-1">
-                <li>AI Agents</li>
-                <li>Web Automation</li>
-                <li>System Design</li>
+              <p className="text-sm font-bold uppercase tracking-widest text-[#085078]/40">Expertise</p>
+              <ul className="text-lg font-medium space-y-2">
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#9AE4CB]" />AI Agents</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#9AE4CB]" />Web Automation</li>
+                <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[#9AE4CB]" />System Design</li>
               </ul>
             </div>
           </motion.div>
         </div>
+
+        {/* Editorial scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-[#085078]/25">Scroll</span>
+          <motion.div
+            className="w-[1px] h-8 bg-[#085078]/15"
+            animate={{ scaleY: [0.3, 1, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            style={{ transformOrigin: 'top' }}
+          />
+        </motion.div>
       </section>
 
       {/* Capabilities Section */}
@@ -320,6 +376,7 @@ const Home = () => {
             >
               <Link
                 to="/contact"
+                aria-label="Book a strategy call to discuss your project"
                 className="inline-flex items-center gap-6 px-12 py-8 bg-[#085078] text-white rounded-2xl text-2xl font-bold hover:bg-[#085078]/90 transition-all shadow-2xl"
               >
                 Book a Call

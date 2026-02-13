@@ -4,89 +4,89 @@
 
 @layer base {
   :root {
-    --background: 248 250 252;
-    --foreground: 15 23 42;
+    --background: 210 33% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 255 255 255;
-    --card-foreground: 15 23 42;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 79 70 229;
-    --primary-foreground: 248 250 252;
+    --primary: 243 75% 59%;
+    --primary-foreground: 210 33% 98%;
 
-    --secondary: 226 232 240;
-    --secondary-foreground: 15 23 42;
+    --secondary: 215 20% 91%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 241 245 249;
-    --muted-foreground: 100 116 139;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 224 242 254;
-    --accent-foreground: 79 70 229;
+    --accent: 204 94% 94%;
+    --accent-foreground: 243 75% 59%;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 33% 98%;
 
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 79 70 229;
+    --border: 215 20% 91%;
+    --input: 215 20% 91%;
+    --ring: 243 75% 59%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 248 250 252;
+    --sidebar-background: 210 33% 98%;
 
-    --sidebar-foreground: 51 65 85;
+    --sidebar-foreground: 215 25% 27%;
 
-    --sidebar-primary: 79 70 229;
+    --sidebar-primary: 243 75% 59%;
 
-    --sidebar-primary-foreground: 248 250 252;
+    --sidebar-primary-foreground: 210 33% 98%;
 
-    --sidebar-accent: 241 245 249;
+    --sidebar-accent: 210 40% 96%;
 
-    --sidebar-accent-foreground: 79 70 229;
+    --sidebar-accent-foreground: 243 75% 59%;
 
-    --sidebar-border: 226 232 240;
+    --sidebar-border: 215 20% 91%;
 
-    --sidebar-ring: 79 70 229;
+    --sidebar-ring: 243 75% 59%;
   }
 
   .dark {
-    --background: 15 23 42;
-    --foreground: 248 250 252;
+    --background: 222 47% 11%;
+    --foreground: 210 33% 98%;
 
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
+    --card: 217 33% 17%;
+    --card-foreground: 210 33% 98%;
 
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 33% 98%;
 
-    --primary: 129 140 248;
-    --primary-foreground: 15 23 42;
+    --primary: 234 89% 74%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 51 65 85;
-    --secondary-foreground: 248 250 252;
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 210 33% 98%;
 
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
+    --muted: 215 25% 27%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 51 65 85;
-    --accent-foreground: 129 140 248;
+    --accent: 215 25% 27%;
+    --accent-foreground: 234 89% 74%;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 33% 98%;
 
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 129 140 248;
-    --sidebar-background: 15 23 42;
-    --sidebar-foreground: 226 232 240;
-    --sidebar-primary: 129 140 248;
-    --sidebar-primary-foreground: 15 23 42;
-    --sidebar-accent: 30 41 59;
-    --sidebar-accent-foreground: 226 232 240;
-    --sidebar-border: 51 65 85;
-    --sidebar-ring: 129 140 248;
+    --border: 215 25% 27%;
+    --input: 215 25% 27%;
+    --ring: 234 89% 74%;
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 215 20% 91%;
+    --sidebar-primary: 234 89% 74%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 215 20% 91%;
+    --sidebar-border: 215 25% 27%;
+    --sidebar-ring: 234 89% 74%;
   }
 }
 
@@ -133,5 +133,49 @@
   /* Set default body font */
   body {
     font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Accessibility Improvements */
+@layer base {
+
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus styles for keyboard navigation */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+
+  /* Specific focus styles for links */
+  a:focus-visible {
+    @apply outline-2 outline-offset-4 outline-blue-400 rounded-sm;
+  }
+
+  /* Specific focus styles for buttons */
+  button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500 ring-2 ring-blue-400/50;
+  }
+
+  /* Improve focus visibility on interactive cards */
+  [role="button"]:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+
+  /* Remove default outline, rely on :focus-visible */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Ensure sufficient color contrast for reduced opacity text */
+  .text-opacity-70 {
+    opacity: 0.85;
+  }
+
+  .text-opacity-60 {
+    opacity: 0.75;
   }
 }

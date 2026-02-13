@@ -9,7 +9,6 @@ interface FooterProps {
 
 const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProps) => {
     const isDark = theme === 'dark';
-    const textColor = isDark ? 'text-white' : 'text-[#085078]';
     const subTextColor = isDark ? 'text-white/60' : 'text-[#085078]/70';
     const borderColor = isDark ? 'border-white/10' : 'border-[#085078]/10';
     const accentColor = isDark ? 'text-[#9AE4CB]' : 'text-[#085078]';
@@ -21,24 +20,24 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
         const minimalAccentColor = isDark ? 'text-white' : 'text-[#273B3A]';
 
         return (
-            <footer className={`py-14 px-8 md:px-24 lg:px-40 ${borderColor} border-t relative z-20`}>
+            <footer className={`py-14 px-8 md:px-24 lg:px-40 ${borderColor} border-t relative z-20`} aria-label="Site footer">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-10 font-sans">
                     {/* Left: Identity */}
                     <div className="space-y-1">
                         <p className={`${minimalAccentColor} text-[13px] font-bold tracking-[0.2em] uppercase`}>Veerendra Kumar</p>
-                        <p className={`${minimalSubTextColor} text-[11px] tracking-widest uppercase`}>© 2025 Systemized Excellence</p>
+                        <p className={`${minimalSubTextColor} text-[11px] tracking-widest uppercase`}>© 2026 Systemized Excellence</p>
                     </div>
 
                     {/* Center: Navigation */}
                     <div className="flex flex-col gap-3">
                         <p className={`${minimalSubTextColor} text-[11px] tracking-[0.4em] uppercase font-bold text-center md:text-left`}>Navigation</p>
-                        <div className="flex gap-8 justify-center md:justify-start">
+                        <nav className="flex gap-8 justify-center md:justify-start" aria-label="Footer navigation">
                             <Link to="/" className={`${minimalAccentColor} hover:opacity-60 transition-opacity uppercase tracking-widest text-[11px] font-bold`}>Home</Link>
                             <Link to="/home" className={`${minimalAccentColor} hover:opacity-60 transition-opacity uppercase tracking-widest text-[11px] font-bold`}>Work</Link>
                             <Link to="/portfolio" className={`${minimalAccentColor} hover:opacity-60 transition-opacity uppercase tracking-widest text-[11px] font-bold`}>Portfolio</Link>
                             <Link to="/skills" className={`${minimalAccentColor} hover:opacity-60 transition-opacity uppercase tracking-widest text-[11px] font-bold`}>Skills</Link>
                             <Link to="/contact" className={`${minimalAccentColor} hover:opacity-60 transition-opacity uppercase tracking-widest text-[11px] font-bold`}>Contact</Link>
-                        </div>
+                        </nav>
                     </div>
 
                     {/* Right: Status */}
@@ -54,10 +53,10 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
     }
 
     return (
-        <footer className={`py-14 relative overflow-hidden font-sans border-t ${borderColor} ${bgColor} ${className}`}>
+        <footer className={`py-14 relative overflow-hidden font-sans border-t ${borderColor} ${bgColor} ${className}`} aria-label="Site footer">
             {/* Background Watermark */}
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-bold ${watermarkColor} select-none pointer-events-none leading-none z-0`}>
-                2025
+                2026
             </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -70,7 +69,7 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
                                 V
                             </div>
                             <div>
-                                <h3 className={`text-xl font-bold ${textColor}`}>Veerendra Kumar</h3>
+                                <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-[#085078]'}`}>Veerendra Kumar</h3>
                                 <p className={`${accentColor} text-[10px] uppercase tracking-widest font-black opacity-80`}>Automation Engineer</p>
                             </div>
                         </div>
@@ -96,7 +95,7 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
                         <h4 className={`text-sm font-black uppercase tracking-[0.1em] ${accentColor} border-b ${borderColor} pb-2 inline-block`}>
                             Navigation
                         </h4>
-                        <nav className="flex flex-col gap-2.5">
+                        <nav className="flex flex-col gap-2.5" aria-label="Footer navigation">
                             {[
                                 { name: 'Home', path: '/' },
                                 { name: 'Work', path: '/home' },
@@ -107,7 +106,7 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
                                 <Link
                                     key={link.name}
                                     to={link.path}
-                                    className={`${subTextColor} hover:${textColor} transition-colors flex items-center justify-between group text-sm font-bold border-b border-transparent hover:border-current pb-0.5`}
+                                    className={`${subTextColor} ${isDark ? 'hover:text-white' : 'hover:text-[#085078]'} transition-colors flex items-center justify-between group text-sm font-bold border-b border-transparent hover:border-current pb-0.5`}
                                 >
                                     <span>{link.name}</span>
                                     <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -124,7 +123,7 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
                         <div className="flex flex-col gap-2.5">
                             {[
                                 { name: 'GitHub', url: 'https://github.com/veeru594', icon: Github },
-                                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/veerendra-kumar0618/', icon: Linkedin },
+                                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/veerendra-kumar-7615b2347/', icon: Linkedin },
                                 { name: 'Email', url: 'mailto:veerandrak49@gmail.com', icon: Mail }
                             ].map(social => (
                                 <a
@@ -132,7 +131,8 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`${subTextColor} hover:${textColor} transition-colors flex items-center justify-between group text-sm font-bold border-b border-transparent hover:border-current pb-0.5`}
+                                    aria-label={`Visit ${social.name} profile`}
+                                    className={`${subTextColor} ${isDark ? 'hover:text-white' : 'hover:text-[#085078]'} transition-colors flex items-center justify-between group text-sm font-bold border-b border-transparent hover:border-current pb-0.5`}
                                 >
                                     <span className="flex items-center gap-2.5">
                                         <social.icon className="w-4 h-4 opacity-70 group-hover:scale-110 transition-transform" />
@@ -147,12 +147,8 @@ const Footer = ({ variant = 'main', theme = 'dark', className = '' }: FooterProp
 
                 {/* Bottom Bar */}
                 <div className={`pt-4 border-t ${borderColor} flex flex-col md:flex-row justify-between items-center gap-2 text-[10px] ${subTextColor} font-black uppercase tracking-[0.2em]`}>
-                    <p>© 2025 Veerendra Kumar • All rights reserved</p>
-                    <div className="flex gap-6">
-                        {['Privacy Policy', 'Terms of Use', 'Sitemap'].map(item => (
-                            <span key={item} className={`hover:${textColor} transition-colors cursor-pointer`}>{item}</span>
-                        ))}
-                    </div>
+                    <p>© 2026 Veerendra Kumar • All rights reserved</p>
+                    <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'hover:text-white' : 'hover:text-[#085078]'} transition-colors`}>Sitemap</a>
                 </div>
 
                 <div className="text-center mt-6">

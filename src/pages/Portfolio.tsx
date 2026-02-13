@@ -61,12 +61,12 @@ const Portfolio = () => {
     }
   ];
 
-  const fadeInUp: any = {
+  const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-  };
+  } as const;
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-[#085078] font-sans selection:bg-[#9AE4CB]/30 overflow-x-hidden">
@@ -254,6 +254,7 @@ const Portfolio = () => {
                     href="https://github.com/veeru594"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Explore documentation for ${project.title} on GitHub`}
                     whileHover={{ x: 10 }}
                     className="inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest pt-6"
                   >
@@ -327,6 +328,7 @@ const Portfolio = () => {
             >
               <Link
                 to="/contact"
+                aria-label="Initiate a new project with Veerandra"
                 className="inline-flex items-center gap-6 px-12 py-8 bg-[#085078] text-white rounded-2xl text-2xl font-bold hover:bg-[#085078]/90 transition-all shadow-2xl"
               >
                 Initiate Project
@@ -339,7 +341,6 @@ const Portfolio = () => {
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-[#9AE4CB]/5 rounded-full blur-[120px] -z-10" />
       </section>
 
-      {/* Footer */}
       {/* Footer */}
       <Footer variant="main" theme="light" />
     </div>

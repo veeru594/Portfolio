@@ -541,7 +541,12 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
     }, [shapes]);
 
     return (
-        <div ref={mountRef} className="w-full h-full relative overflow-hidden" />
+        <div
+            ref={mountRef}
+            className="w-full h-full relative overflow-hidden"
+            aria-hidden="true"
+            aria-label="Animated particle background with morphing shapes"
+        />
     );
 };
 

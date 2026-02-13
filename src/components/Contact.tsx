@@ -60,28 +60,28 @@ const Contact = () => {
   return (
     <div className="relative z-10">
       <div className="mb-12">
-        <div className="flex items-center gap-2 text-orange-600 mb-4">
+        <div className="flex items-center gap-2 text-[#9AE4CB] mb-4">
           <Sparkles size={16} />
           <span className="text-[10px] font-mono tracking-[0.4em] uppercase font-bold">Initialize Inquiry</span>
         </div>
-        <h2 className="text-3xl font-bold text-amber-950">Direct Message</h2>
+        <h2 className="text-3xl font-bold text-[#085078]">Direct Message</h2>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-[10px] font-mono text-amber-900/40 uppercase tracking-widest ml-1 font-bold">Full Name</label>
+            <label className="text-[10px] font-mono text-[#085078]/40 uppercase tracking-widest ml-1 font-bold">Full Name</label>
             <Input
               name="name"
               placeholder="John Doe"
               value={formData.name}
               onChange={handleChange}
               required
-              className="bg-white/80 border-amber-200 text-amber-950 placeholder:text-amber-900/20 h-14 focus:border-orange-500/50 focus:bg-white transition-all shadow-sm"
+              className="bg-white/80 border-[#085078]/15 text-[#085078] placeholder:text-[#085078]/20 h-14 focus:border-[#9AE4CB] focus:bg-white transition-all shadow-sm"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-mono text-amber-900/40 uppercase tracking-widest ml-1 font-bold">Email Address</label>
+            <label className="text-[10px] font-mono text-[#085078]/40 uppercase tracking-widest ml-1 font-bold">Email Address</label>
             <Input
               type="email"
               name="email"
@@ -89,7 +89,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="bg-white/80 border-amber-200 text-amber-950 placeholder:text-amber-900/20 h-14 focus:border-orange-500/50 focus:bg-white transition-all shadow-sm"
+              className="bg-white/80 border-[#085078]/15 text-[#085078] placeholder:text-[#085078]/20 h-14 focus:border-[#9AE4CB] focus:bg-white transition-all shadow-sm"
             />
           </div>
         </div>
@@ -115,14 +115,14 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             required
-            className="bg-white/80 border-amber-200 text-amber-950 placeholder:text-amber-900/20 focus:border-orange-500/50 focus:bg-white transition-all resize-none shadow-sm"
+            className="bg-white/80 border-[#085078]/15 text-[#085078] placeholder:text-[#085078]/20 focus:border-[#9AE4CB] focus:bg-white transition-all resize-none shadow-sm"
           />
         </div>
 
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-14 bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold text-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
+          className="w-full h-14 bg-[#085078] text-white font-bold text-lg shadow-sm hover:shadow-lg hover:bg-[#085078]/90 hover:-translate-y-1 transition-all"
         >
           {isSubmitting ? "Transmitting..." : "Send Message"}
           <Send className="ml-2 w-5 h-5" />

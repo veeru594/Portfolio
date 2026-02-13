@@ -61,7 +61,7 @@ export default {
 				},
 				'intro-dark': '#0b0c10',
 				'intro-light': '#f5f5f5',
-				'intro-accent': '#ff8c1a',
+				'intro-accent': '#9AE4CB',
 				'intro-muted': '#9a9a9a',
 			},
 			borderRadius: {
