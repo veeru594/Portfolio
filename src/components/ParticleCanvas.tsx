@@ -7,7 +7,7 @@ interface ParticleCanvasProps {
 
 const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
     const mountRef = useRef<HTMLDivElement>(null);
-    const mouse = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
+    const mouse = useRef({ x: 10000, y: 10000, targetX: 0, targetY: 0 });
     const isInitialized = useRef(false);
 
     useEffect(() => {
@@ -235,7 +235,7 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                 blending: THREE.NormalBlending,
                 uniforms: {
                     uTime: { value: 0 },
-                    uMouse: { value: new THREE.Vector2(0, 0) },
+                    uMouse: { value: new THREE.Vector2(10000, 10000) },
                     uVolDepth: { value: VOL_DEPTH },
                     uMorphProgress: { value: 0.0 }
                 },
