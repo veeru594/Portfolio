@@ -353,14 +353,14 @@ const ParticleCanvas: React.FC<ParticleCanvasProps> = ({ shapes }) => {
                         float glow = pow(1.0 - (r * 2.0), 0.6) * 0.4;
                         
                         // Color gradient based on morph progress
-                        // Champagne Pink #E6D4C7 (0.902, 0.831, 0.780)
-                        // Cyan/Teal #9AE4CB (0.604, 0.894, 0.796)
-                        vec3 colorChampagne = vec3(0.902, 0.831, 0.780);
-                        vec3 colorCyan = vec3(0.604, 0.894, 0.796);
+                        // Champagne Pink #ffe9d4 (1.0, 0.914, 0.831)
+                        // Lighter Champagne for depth (1.0, 0.96, 0.9)
+                        vec3 colorChampagne = vec3(1.0, 0.914, 0.831);
+                        vec3 colorLight = vec3(1.0, 0.96, 0.902);
                         
                         // Smooth color transition during morphing
                         float colorMix = smoothstep(0.2, 0.8, vMorphProgress);
-                        vec3 baseColor = mix(colorChampagne, colorCyan, colorMix);
+                        vec3 baseColor = mix(colorChampagne, colorLight, colorMix);
                         
                         // Add variation based on position for depth
                         float positionHue = sin(vPosition.x * 0.005 + vPosition.y * 0.005) * 0.1;
